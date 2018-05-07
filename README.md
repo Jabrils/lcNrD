@@ -10,16 +10,10 @@ I find myself having to clean up data quite often & lose python scripts that I w
 * Copy all operations onto a new file
 
 ## optional arguments: (* = required)
-*  -h, --help            show this help message and exit
-*  *--target TARGET       this is the file you're targeting to get the lcNrD treatment (default: None)
-*  --outputName OUTPUTNAME this is the file you want the lcNrD file to output as (default: None)
-*  --lowercase LOWERCASE T = lowercase all, F = keep original (default: T)
-*  --removeDups REMOVEDUPS T = lowercase all, F = keep original (default: T)
 
 ```
-optional arguments:
   -h, --help            show this help message and exit
-  --target TARGET       this is the file you're targeting to get the lcNrD
+* --target TARGET       this is the file you're targeting to get the lcNrD
                         treatment (default: None)
   --outputName OUTPUTNAME
                         this is the file you want the lcNrD file to output as
