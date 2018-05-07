@@ -9,7 +9,7 @@ I find myself having to clean up data quite often & lose python scripts that I w
 * Remove duplicates of a file
 * Copy all operations onto a new file
 
-## optional arguments: (* = required)
+## Program Arguments: (* = required)
 
 ```
   -h, --help            show this help message and exit
