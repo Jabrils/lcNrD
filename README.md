@@ -2,7 +2,7 @@
 
 lowercase AND remove Duplicates - A Very Simple Program;
 
-I find myself having to clean up data quite often & lose python scripts that I write for data cleaning. So I've decided to start this lcNrD project that is a but more of a permanent & I will add to its usefulness as I see fit.
+I find myself having to clean up data quite often & lose python scripts that I write for data cleaning. So I've decided to start this lcNrD project that is a but more of a permanent solution & I will add to its usefulness as I see fit.
 
 Current Functionality:
 • Lowercase the text of a file
