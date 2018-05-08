@@ -13,13 +13,9 @@ I find myself having to clean up data quite often & lose python scripts that I w
 
 ```
   -h, --help            show this help message and exit
-* --target TARGET       this is the file you're targeting to get the lcNrD
-                        treatment (default: None)
-  --outputName OUTPUTNAME
-                        this is the file you want the lcNrD file to output as
-                        (default: None)
-  --lowercase LOWERCASE
-                        T = lowercase all, F = keep original (default: T)
-  --removeDups REMOVEDUPS
-                        T = lowercase all, F = keep original (default: T)
+* -f FILE, --file FILE  this is the file you're targeting to get the lcNrD
+                        treatment
+  -o OUT, --out OUT     this is the file you want the lcNrD file to output as
+  -l, --lowercase       add -l to set lowercase to true
+  -d, --duplicates      add -d to remove duplicate elements
 ```
