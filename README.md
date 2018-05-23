@@ -18,10 +18,14 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 ```
   -h, --help            show this help message and exit
 * -f FILE, --file FILE  this is the file you're targeting to get the lcNrD
-                        treatment
-  -o OUT, --out OUT     this is the file you want the lcNrD file to output as
-  -l, --lowercase       add -l to set lowercase to true
-  -d, --duplicates      add -d to remove duplicate elements
+                        treatment (default: None)
+  -o OUT, --out OUT     this is the file you want the lcNrD file to output as.
+                        Default = same name + _LcNrD (default: None)
+  -l, --lowercase       add -l to set lowercase to true (default: False)
+  -d, --duplicates      add -d to remove duplicate elements (default: False)
+  -rk REMOVAL_KEYWORD, --removal_keyword REMOVAL_KEYWORD
+                        add -rk to remove lines with the removal keyword
+                        (default: None)
 ```
 
 ## Roadmap:
