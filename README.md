@@ -11,7 +11,8 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 * Lowercase the text of a file
 * Remove duplicates of a file
 * Copy all operations onto a new file
-* Remove lines containing a keyword
+* Remove lines containing a removal keyword
+* Removes all lines except ones that contain a keep keyword
 
 ## Program Arguments: (* = required)
 
@@ -35,4 +36,3 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 ## Roadmap:
 * Add input delimiter
 * Add output delimiter
-* Add function that removes all lines except ones that contain a keyword
