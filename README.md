@@ -16,8 +16,9 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 ## Program Arguments: (* = required)
 
 ```
-  -h, --help            show this help message and exit
-* -f FILE, --file FILE  this is the file you're targeting to get the lcNrD
+  -v, --version         Show program's version number and exit.
+  -h, --help            ** = required
+  -f FILE, --file FILE  ** this is the file you're targeting to get the lcNrD
                         treatment (default: None)
   -o OUT, --out OUT     this is the file you want the lcNrD file to output as.
                         Default = same name + _LcNrD (default: None)
@@ -25,6 +26,9 @@ As it stands, this program works best with text listed using the '\n' delimiter.
   -d, --duplicates      add -d to remove duplicate elements (default: False)
   -rk REMOVAL_KEYWORD, --removal_keyword REMOVAL_KEYWORD
                         add -rk to remove lines with the removal keyword
+                        (default: None)
+  -kk KEEP_KEYWORD, --keep_keyword KEEP_KEYWORD
+                        add -kk to keep only the lines with the keep keyword
                         (default: None)
 ```
 
