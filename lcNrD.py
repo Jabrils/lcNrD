@@ -1,9 +1,13 @@
 import argparse
 
-parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, add_help=False)
+parser.add_argument('-v', '--version', action='version',
+                    version='%(prog)s 1.3', help="Show program's version number and exit.")
+parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
+                    help='** = required')
 parser.add_argument(
     "-f", "--file", type=str,
-    help='this is the file you\'re targeting to get the lcNrD treatment')
+    help='** this is the file you\'re targeting to get the lcNrD treatment')
 parser.add_argument("-o", "--out", type=str,
     help='this is the file you want the lcNrD file to output as. Default = same name + _LcNrD')
 
@@ -15,9 +19,9 @@ parser.add_argument('-d', "--duplicates", action='store_true',
     help='add -d to remove duplicate elements')
 parser.add_argument('-rk', "--removal_keyword", type=str,
     help='add -rk to remove lines with the removal keyword')
+parser.add_argument('-kk', "--keep_keyword", type=str,
+    help='add -kk to keep only the lines with the keep keyword')
 args = parser.parse_args()
-
-print(args.removal_keyword)
 
 print('Grabbing file contents...')
 
@@ -31,7 +35,7 @@ lines = text.split("\n")
 
 # this checks if there is a removal keyword & performs this operation if so
 if args.removal_keyword != None:
-    print('removing lines with keyword...')
+    print('removing lines with removal keyword...')
     temp = ''
 
     # loop through all elements in the lines array
@@ -39,6 +43,21 @@ if args.removal_keyword != None:
         # if not containing the removal keyword, then add it to temp
         if args.removal_keyword not in i:
             temp+='\n'+i
+    
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]
+
+# this checks if there is a removal keyword & performs this operation if so
+if args.keep_keyword != None:
+    print('removing lines without keep keyword...')
+    temp = ''
+
+    # loop through all elements in the lines array
+    for i in lines:
+        # if not containing the removal keyword, then add it to temp
+        if args.keep_keyword in i:
+            temp+='\n'+i
+            print(i)
     
     # lines now = temp split, minus the first element which is an empty element
     lines = temp.split('\n')[1:]
