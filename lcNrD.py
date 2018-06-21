@@ -1,4 +1,5 @@
 import argparse
+import re 
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, add_help=False)
 parser.add_argument('-v', '--version', action='version',
@@ -21,6 +22,8 @@ parser.add_argument('-rk', "--removal_keyword", type=str,
     help='add -rk to remove lines with the removal keyword')
 parser.add_argument('-kk', "--keep_keyword", type=str,
     help='add -kk to keep only the lines with the keep keyword')
+parser.add_argument('-regex', "--keep_regex", type=str,
+help='add -regex to remove elements which do not fit the specified format')
 args = parser.parse_args()
 
 print('Grabbing file contents...')
@@ -33,6 +36,25 @@ with open(args.file, "r") as fp:
 # lets turn every line into an array 
 lines = text.split("\n")
 
+# search for certain format https://regexr.com/
+if args.keep_regex != None:
+    print('Searching for pattern,removing unmatching words...')
+    temp = ''
+
+    # loop through all elements in the lines array
+    for i in lines:
+
+        # search for words which match regex
+        if re.search(args.keep_regex,i): 
+            word = re.search(args.keep_regex,i).group() 
+            temp += '\n'+ word
+    
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]
+
+
+
+            
 # this checks if there is a removal keyword & performs this operation if so
 if args.removal_keyword != None:
     print('removing lines with removal keyword...')
