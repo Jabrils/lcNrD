@@ -32,7 +32,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
   -kk KEEP_KEYWORD, --keep_keyword KEEP_KEYWORD
                         add -kk to keep only the lines with the keep keyword
                         (default: None)
-  --regex KEEP_REGEX, --keep_regex KEEP_REGEX
+  -regex KEEP_REGEX, --keep_regex KEEP_REGEX
                         add -regex to remove elements which do not fit the specified format
                         (default: None)
 ```
