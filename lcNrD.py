@@ -30,7 +30,7 @@ print('Grabbing file contents...')
 with open(args.file, "r") as fp:
     text = fp.read()
 
-# lets turn every line into an array 
+# let's create an array of the lines
 lines = text.split("\n")
 
 # this checks if there is a removal keyword & performs this operation if so
