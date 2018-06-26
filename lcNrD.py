@@ -22,8 +22,8 @@ parser.add_argument('-rk', "--removal_keyword", type=str,
     help='add -rk to remove lines with the removal keyword')
 parser.add_argument('-kk', "--keep_keyword", type=str,
     help='add -kk to keep only the lines with the keep keyword')
-parser.add_argument('-regex', "--keep_regex", type=str,
-help='add -regex to remove elements which do not fit the specified format')
+parser.add_argument('-krx', "--keep_regex", type=str,
+help='add -krx to remove elements which do not fit the specified format')
 args = parser.parse_args()
 
 print('Grabbing file contents...')
