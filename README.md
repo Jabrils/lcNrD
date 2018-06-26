@@ -13,6 +13,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 * Copy all operations onto a new file
 * Remove lines containing a removal keyword
 * Removes all lines except ones that contain a keep keyword
+* Remove everything except ones that matches Regular Expression
 
 ## Program Arguments: (* = required)
 
@@ -30,6 +31,9 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         (default: None)
   -kk KEEP_KEYWORD, --keep_keyword KEEP_KEYWORD
                         add -kk to keep only the lines with the keep keyword
+                        (default: None)
+  -regex KEEP_REGEX, --keep_regex KEEP_REGEX
+                        add -regex to remove elements which do not fit the specified format
                         (default: None)
 ```
 
