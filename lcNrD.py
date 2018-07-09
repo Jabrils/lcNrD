@@ -18,6 +18,10 @@ parser.add_argument('-l', "--lowercase", action='store_true',
     help='add -l to set lowercase to true')
 parser.add_argument('-d', "--duplicates", action='store_true',
     help='add -d to remove duplicate elements')
+parser.add_argument('-cmi', "--character_min", type=str, default='0',
+    help='limits the minimal amount of chacters required')
+parser.add_argument('-cma', "--character_max", type=str,
+    help='limits the maximum amount of chacters required')
 parser.add_argument('-rk', "--removal_keyword", type=str,
     help='add -rk to remove lines with the removal keyword')
 parser.add_argument('-kk', "--keep_keyword", type=str,
@@ -36,6 +40,28 @@ with open(args.file, "r") as fp:
 # let's create an array of the lines
 lines = text.split("\n")
 
+# Remove lines that are UNDER min character requirements
+if int(args.character_min) > 0:
+    print('Removing lines under min character requirements...')
+    temp = ''
+    for i in lines:
+        if len(i) > int(args.character_min)-1:
+            temp+='\n'+i
+
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]        
+
+# Remove lines that are OVER max character requirements
+if args.character_max != None:
+    print('Removing lines over max character requirements...')
+    temp = ''
+    for i in lines:
+        if len(i) < int(args.character_max)+1:
+            temp+='\n'+i
+
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]        
+
 # search for certain format https://regexr.com/
 if args.keep_regex != None:
     print('Searching for pattern,removing unmatching words...')
@@ -51,10 +77,7 @@ if args.keep_regex != None:
     
     # lines now = temp split, minus the first element which is an empty element
     lines = temp.split('\n')[1:]
-
-
-
-            
+          
 # this checks if there is a removal keyword & performs this operation if so
 if args.removal_keyword != None:
     print('removing lines with removal keyword...')
@@ -102,7 +125,7 @@ if not args.out:
     # ok this is a little bit obscure but its reverse splitting an string into
     # a list once so 'dir/file.txt' -> ['dir/file', 'txt']. then the '*' before
     # it when passed to format tells format to read the list as mulptiple args.
-    args.out = "{}._lcNrD.{}".format(*args.file.rsplit(".", 1))
+    args.out = "{}_lcNrD.{}".format(*args.file.rsplit(".", 1))
 
 
 # save the converted file

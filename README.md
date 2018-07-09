@@ -14,6 +14,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 * Remove lines containing a removal keyword
 * Removes all lines except ones that contain a keep keyword
 * Remove everything except ones that matches Regular Expression
+* keep only lines with a min & max amount of characters
 
 ## Program Arguments: (* = required)
 
@@ -26,6 +27,12 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         Default = same name + _LcNrD (default: None)
   -l, --lowercase       add -l to set lowercase to true (default: False)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
+  -cmi CHARACTER_MIN, --character_min CHARACTER_MIN
+                        limits the minimal amount of chacters required
+                        (default: 0)
+  -cma CHARACTER_MAX, --character_max CHARACTER_MAX
+                        limits the maximum amount of chacters required
+                        (default: None)
   -rk REMOVAL_KEYWORD, --removal_keyword REMOVAL_KEYWORD
                         add -rk to remove lines with the removal keyword
                         (default: None)
@@ -33,8 +40,8 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         add -kk to keep only the lines with the keep keyword
                         (default: None)
   -krx KEEP_REGEX, --keep_regex KEEP_REGEX
-                        add -regex to remove elements which do not fit the specified format
-                        (default: None)
+                        add -krx to remove elements which do not fit the
+                        specified format (default: None)
 ```
 
 ## Roadmap:
