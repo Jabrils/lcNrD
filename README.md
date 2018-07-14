@@ -27,21 +27,30 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         Default = same name + _LcNrD (default: None)
   -l, --lowercase       add -l to set lowercase to true (default: False)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
+  -rf, --replace_file   add -rf to replace the original file after lcnrd
+                        operation (default: False)
+  -bl, --blank_lines    add -bl to remove all blank lines (default: False)
   -cmi CHARACTER_MIN, --character_min CHARACTER_MIN
                         limits the minimal amount of chacters required
                         (default: 0)
   -cma CHARACTER_MAX, --character_max CHARACTER_MAX
                         limits the maximum amount of chacters required
                         (default: None)
-  -rk REMOVAL_KEYWORD, --removal_keyword REMOVAL_KEYWORD
-                        add -rk to remove lines with the removal keyword
+  -kr KEYWORD_REMOVAL, --keyword_removal KEYWORD_REMOVAL
+                        add a -kr to remove lines with the removal keyword
                         (default: None)
-  -kk KEEP_KEYWORD, --keep_keyword KEEP_KEYWORD
-                        add -kk to keep only the lines with the keep keyword
+  -kk KEYWORD_KEEP, --keyword_keep KEYWORD_KEEP
+                        add a -kk to keep only the lines with the keep keyword
                         (default: None)
-  -krx KEEP_REGEX, --keep_regex KEEP_REGEX
-                        add -krx to remove elements which do not fit the
-                        specified format (default: None)
+  -kdb KEYWORD_DELETE_BEFORE, --keyword_delete_before KEYWORD_DELETE_BEFORE
+                        add a -kdb to delete all text before the delete before
+                        keyword (default: None)
+  -kda KEYWORD_DELETE_AFTER, --keyword_delete_after KEYWORD_DELETE_AFTER
+                        add a -kda to delete all text after the delete after
+                        keyword (default: None)
+  -kae KEYWORD_ADD_END, --keyword_add_end KEYWORD_ADD_END
+                        add a -kae to add some text to the end of every line
+                        (default: None)
 ```
 
 ## Roadmap:

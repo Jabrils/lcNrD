@@ -3,7 +3,7 @@ import re
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, add_help=False)
 parser.add_argument('-v', '--version', action='version',
-                    version='%(prog)s 1.3', help="Show program's version number and exit.")
+                    version='%(prog)s 1.5', help="Show program's version number and exit.")
 parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                     help='** = required')
 parser.add_argument(
@@ -18,16 +18,24 @@ parser.add_argument('-l', "--lowercase", action='store_true',
     help='add -l to set lowercase to true')
 parser.add_argument('-d', "--duplicates", action='store_true',
     help='add -d to remove duplicate elements')
-parser.add_argument('-cmi', "--character_min", type=str, default='0',
+parser.add_argument('-rf', "--replace_file", action='store_true',
+    help='add -rf to replace the original file after lcnrd operation')
+parser.add_argument('-bl', "--blank_lines", action='store_true',
+    help='add -bl to remove all blank lines')
+parser.add_argument('-cmi', "--character_min", type=int, default=0,
     help='limits the minimal amount of chacters required')
-parser.add_argument('-cma', "--character_max", type=str,
+parser.add_argument('-cma', "--character_max", type=int,
     help='limits the maximum amount of chacters required')
-parser.add_argument('-rk', "--removal_keyword", type=str,
-    help='add -rk to remove lines with the removal keyword')
-parser.add_argument('-kk', "--keep_keyword", type=str,
-    help='add -kk to keep only the lines with the keep keyword')
-parser.add_argument('-krx', "--keep_regex", type=str,
-help='add -krx to remove elements which do not fit the specified format')
+parser.add_argument('-kr', "--keyword_removal", type=str,
+    help='add a -kr to remove lines with the removal keyword')
+parser.add_argument('-kk', "--keyword_keep", type=str,
+    help='add a -kk to keep only the lines with the keep keyword')
+parser.add_argument('-kdb', "--keyword_delete_before", type=str,
+    help='add a -kdb to delete all text before the delete before keyword')
+parser.add_argument('-kda', "--keyword_delete_after", type=str,
+    help='add a -kda to delete all text after the delete after keyword')
+parser.add_argument('-kae', "--keyword_add_end", type=str,
+    help='add a -kae to add some text to the end of every line')
 args = parser.parse_args()
 
 print('Grabbing file contents...')
@@ -40,12 +48,65 @@ with open(args.file, "r") as fp:
 # let's create an array of the lines
 lines = text.split("\n")
 
+# Remove blank lines
+if args.blank_lines:
+    print('Removing blank lines...')
+    temp = ''
+    for i in lines:
+        if len(i) != 0:
+            temp+='\n'+i
+ 
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]  
+
+# 
+if args.keyword_delete_before != None:
+    print('removing text before delete keyword...')
+    temp = ''
+
+    # loop through all elements in the lines array
+    for i in lines:
+        # 
+        new = i.split(args.keyword_delete_before)
+        if len(new)>1:
+            t = new[1:]
+            ret = ''
+            for a in t:
+                ret+=a+args.keyword_delete_before
+        else:
+            ret = i
+        temp+='\n'+ret
+    
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]   
+
+# 
+if args.keyword_delete_after != None:
+    print('removing text after delete keyword...')
+    temp = ''
+
+    # loop through all elements in the lines array
+    for i in lines:
+        # 
+        new = i.split(args.keyword_delete_after)
+        if len(new)>1:
+            t = new[:1]
+            ret = ''
+            for a in t:
+                ret+=a+args.keyword_delete_after
+        else:
+            ret = i
+        temp+='\n'+ret
+    
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]          
+
 # Remove lines that are UNDER min character requirements
-if int(args.character_min) > 0:
+if args.character_min > 0:
     print('Removing lines under min character requirements...')
     temp = ''
     for i in lines:
-        if len(i) > int(args.character_min)-1:
+        if len(i) > args.character_min-1:
             temp+='\n'+i
 
     # lines now = temp split, minus the first element which is an empty element
@@ -56,53 +117,36 @@ if args.character_max != None:
     print('Removing lines over max character requirements...')
     temp = ''
     for i in lines:
-        if len(i) < int(args.character_max)+1:
+        if len(i) < args.character_max+1:
             temp+='\n'+i
 
     # lines now = temp split, minus the first element which is an empty element
     lines = temp.split('\n')[1:]        
 
-# search for certain format https://regexr.com/
-if args.keep_regex != None:
-    print('Searching for pattern,removing unmatching words...')
-    temp = ''
-
-    # loop through all elements in the lines array
-    for i in lines:
-
-        # search for words which match regex
-        if re.search(args.keep_regex,i): 
-            word = re.search(args.keep_regex,i).group() 
-            temp += '\n'+ word
-    
-    # lines now = temp split, minus the first element which is an empty element
-    lines = temp.split('\n')[1:]
-          
 # this checks if there is a removal keyword & performs this operation if so
-if args.removal_keyword != None:
+if args.keyword_removal != None:
     print('removing lines with removal keyword...')
     temp = ''
 
     # loop through all elements in the lines array
     for i in lines:
         # if not containing the removal keyword, then add it to temp
-        if args.removal_keyword not in i:
+        if args.keyword_removal not in i:
             temp+='\n'+i
     
     # lines now = temp split, minus the first element which is an empty element
     lines = temp.split('\n')[1:]
 
 # this checks if there is a removal keyword & performs this operation if so
-if args.keep_keyword != None:
+if args.keyword_keep != None:
     print('removing lines without keep keyword...')
     temp = ''
 
     # loop through all elements in the lines array
     for i in lines:
         # if not containing the removal keyword, then add it to temp
-        if args.keep_keyword in i:
+        if args.keyword_keep in i:
             temp+='\n'+i
-            print(i)
     
     # lines now = temp split, minus the first element which is an empty element
     lines = temp.split('\n')[1:]
@@ -120,13 +164,27 @@ if args.duplicates:
     print('removing duplicates...')
     lines = set(lines)
 
+# 
+if args.keyword_add_end != None:
+    print('adding keyword to end...')
+    temp = ''
+    
+    for i in lines:
+        temp+='\n'+i+args.keyword_add_end
+
+    # lines now = temp split, minus the first element which is an empty element
+    lines = temp.split('\n')[1:]
+
 # set the name of the new converted file
 if not args.out:
+    if args.replace_file:
+        print('replacing orginal file...')
+        args.out = args.file
+    else:
     # ok this is a little bit obscure but its reverse splitting an string into
     # a list once so 'dir/file.txt' -> ['dir/file', 'txt']. then the '*' before
     # it when passed to format tells format to read the list as mulptiple args.
-    args.out = "{}_lcNrD.{}".format(*args.file.rsplit(".", 1))
-
+        args.out = "{}_lcNrD.{}".format(*args.file.rsplit(".", 1))
 
 # save the converted file
 with open(args.out, "w") as fp:
