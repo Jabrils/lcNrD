@@ -1,4 +1,4 @@
-# lcNrD
+# lcNrD v1.6
 
 lowercase AND remove Duplicates - A Very Simple Program;
 
@@ -27,6 +27,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         Default = same name + _LcNrD (default: None)
   -l, --lowercase       add -l to set lowercase to true (default: False)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
+  -s, --shuffle         add -s to shuffle your list (default: False)
   -rf, --replace_file   add -rf to replace the original file after lcnrd
                         operation (default: False)
   -bl, --blank_lines    add -bl to remove all blank lines (default: False)
@@ -37,11 +38,13 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         limits the maximum amount of chacters required
                         (default: None)
   -kr KEYWORD_REMOVAL, --keyword_removal KEYWORD_REMOVAL
-                        add a -kr to remove lines with the removal keyword
+                        add a -kr to remove lines with the removal keyword,
+                        use *.txt or whatever to point to a list of kr
                         (default: None)
   -kk KEYWORD_KEEP, --keyword_keep KEYWORD_KEEP
-                        add a -kk to keep only the lines with the keep keyword
-                        (default: None)
+                        add a -kk to keep only the lines with the keep
+                        keyword, use *.txt or whatever to point to a list of
+                        kk (default: None)
   -kdb KEYWORD_DELETE_BEFORE, --keyword_delete_before KEYWORD_DELETE_BEFORE
                         add a -kdb to delete all text before the delete before
                         keyword (default: None)

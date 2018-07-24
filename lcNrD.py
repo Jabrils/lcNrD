@@ -1,9 +1,10 @@
 import argparse
 import re 
+import random as r
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, add_help=False)
 parser.add_argument('-v', '--version', action='version',
-                    version='%(prog)s 1.5', help="Show program's version number and exit.")
+                    version='%(prog)s 1.6', help="Show program's version number and exit.")
 parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                     help='** = required')
 parser.add_argument(
@@ -18,6 +19,8 @@ parser.add_argument('-l', "--lowercase", action='store_true',
     help='add -l to set lowercase to true')
 parser.add_argument('-d', "--duplicates", action='store_true',
     help='add -d to remove duplicate elements')
+parser.add_argument('-s', "--shuffle", action='store_true',
+    help='add -s to shuffle your list')
 parser.add_argument('-rf', "--replace_file", action='store_true',
     help='add -rf to replace the original file after lcnrd operation')
 parser.add_argument('-bl', "--blank_lines", action='store_true',
@@ -27,9 +30,9 @@ parser.add_argument('-cmi', "--character_min", type=int, default=0,
 parser.add_argument('-cma', "--character_max", type=int,
     help='limits the maximum amount of chacters required')
 parser.add_argument('-kr', "--keyword_removal", type=str,
-    help='add a -kr to remove lines with the removal keyword')
+    help='add a -kr to remove lines with the removal keyword, use *.txt or whatever to point to a list of kr')
 parser.add_argument('-kk', "--keyword_keep", type=str,
-    help='add a -kk to keep only the lines with the keep keyword')
+    help='add a -kk to keep only the lines with the keep keyword, use *.txt or whatever to point to a list of kk')
 parser.add_argument('-kdb', "--keyword_delete_before", type=str,
     help='add a -kdb to delete all text before the delete before keyword')
 parser.add_argument('-kda', "--keyword_delete_after", type=str,
@@ -126,30 +129,81 @@ if args.character_max != None:
 # this checks if there is a removal keyword & performs this operation if so
 if args.keyword_removal != None:
     print('removing lines with removal keyword...')
+
     temp = ''
 
-    # loop through all elements in the lines array
-    for i in lines:
-        # if not containing the removal keyword, then add it to temp
-        if args.keyword_removal not in i:
-            temp+='\n'+i
-    
-    # lines now = temp split, minus the first element which is an empty element
-    lines = temp.split('\n')[1:]
+    # 
+    if ("*." in args.keyword_removal):
+        print("file used!")
+        print('Reading filter keywords...')
+
+        # open the keyword keep file & save a reference to its contents
+        with open(args.keyword_removal.replace('*',''), "r") as fp:
+            filt = fp.read().split('\n')
+
+        keeper = []
+
+        print('filter keywords from file...')
+        # now we break up the lines, break up the filter keywords, then compare each word
+        for i in lines:
+            for j in (i.split()):
+                for k in filt:
+                    if j != k and i not in keeper:
+                        keeper.append(i)
+                        temp += '\n'+i
+        
+        # lines now = temp split, minus the first element which is an empty element
+        lines = temp.split('\n')[1:]
+    else:
+
+        # loop through all elements in the lines array
+        for i in lines:
+            # if not containing the removal keyword, then add it to temp
+            if args.keyword_removal not in i:
+                temp+='\n'+i
+        
+        # lines now = temp split, minus the first element which is an empty element
+        lines = temp.split('\n')[1:]
 
 # this checks if there is a removal keyword & performs this operation if so
 if args.keyword_keep != None:
     print('removing lines without keep keyword...')
+
     temp = ''
 
-    # loop through all elements in the lines array
-    for i in lines:
-        # if not containing the removal keyword, then add it to temp
-        if args.keyword_keep in i:
-            temp+='\n'+i
-    
-    # lines now = temp split, minus the first element which is an empty element
-    lines = temp.split('\n')[1:]
+    # 
+    if ("*." in args.keyword_keep):
+        print("file used!")
+        print('Reading filter keywords...')
+
+        # open the keyword keep file & save a reference to its contents
+        with open(args.keyword_keep.replace('*',''), "r") as fp:
+            filt = fp.read().split('\n')
+
+        keeper = []
+
+        print('filter keywords from file...')
+        # now we break up the lines, break up the filter keywords, then compare each word
+        for i in lines:
+            for j in (i.split()):
+                for k in filt:
+                    if j == k and i not in keeper:
+                        keeper.append(i)
+                        temp += '\n'+i
+        
+        # lines now = temp split, minus the first element which is an empty element
+        lines = temp.split('\n')[1:]
+    else:
+        print("keyword used!")
+
+        # loop through all elements in the lines array
+        for i in lines:
+            # if not containing the removal keyword, then add it to temp
+            if args.keyword_keep in i:
+                temp+='\n'+i
+        
+        # lines now = temp split, minus the first element which is an empty element
+        lines = temp.split('\n')[1:]
 
 # convert to lowercase while we have the initial string. so only one function
 # call and no loops needed.
@@ -185,6 +239,11 @@ if not args.out:
     # a list once so 'dir/file.txt' -> ['dir/file', 'txt']. then the '*' before
     # it when passed to format tells format to read the list as mulptiple args.
         args.out = "{}_lcNrD.{}".format(*args.file.rsplit(".", 1))
+
+# shuffle the list of content if -s is added
+if args.shuffle:
+    print('shuffling content...')
+    r.shuffle(lines)
 
 # save the converted file
 with open(args.out, "w") as fp:
