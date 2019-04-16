@@ -55,6 +55,20 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         add a -kae to add some text to the end of every line
                         (default: None)
 ```
+## Using the .exe
+The standalone exe works just like the python script, but has all dependencies packaged with it. Follow these steps to use it if on Windows:
+1. Enter the 'dist' folder, or any folder containing lcnrd.exe
+2. Open your terminal of choice
+3. type `.\lcnrd -h` to see all availible options
+
+If you'd like to be able to access lcnrd from anywhere on your computer, add the 'dist' folder into your environment variables, you can do that by:
+1. Going to Start on Windows (or press the windows key)
+2. Search for "Edit the system Environment Variables" (just start typing if that start menu is up to search)
+3. Click that option
+4. Click Environment Variables button at the bottom
+5. In System Variables panel, look for "Path"
+6. Add the full directory to 'dist' to this list of environment variables
+7. You should now from anywhere on your computer be able to type simply `lcnrd -h` from a terminal & it should work!
 
 ## Roadmap:
 * Add input delimiter
