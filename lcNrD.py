@@ -264,6 +264,6 @@ with open(args.out, "w") as fp:
     # its creating a brand new one. This gets quickly gets slow with lots of text
     # so we wanna do this as little as possible. Using join on the list means
     # we just make all the string concatenation opertations in one go.
-    fp.write("\n".join(lines))
+    fp.write(args.output_delimiter.join(lines))
 
 print('...& DONE!')
