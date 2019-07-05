@@ -4,9 +4,6 @@ lowercase AND remove Duplicates - A Very Simple Program;
 
 I find myself having to clean up data quite often & lose python scripts that I write for data cleaning. So I've decided to start this lcNrD project that is a but more of a permanent solution & I will add to its usefulness as I see fit.
 
-## Disclaimer:
-As it stands, this program works best with text listed using the '\n' delimiter. I plan to soon add more delimiter options
-
 ## Current Functionality:
 * Set input delimiter
 * Set output delimiter
