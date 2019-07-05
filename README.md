@@ -28,7 +28,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         Default = same name + _LcNrD (default: None)
   -id INPUT_DELIMITER, --input_delimiter INPUT_DELIMITER
                         this is the delimiter you want lcNrD to use for the
-  -l, --lowercase       add -l to set lowercase to true (default: False)
+                        input file (default: \n)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
   -s, --shuffle         add -s to shuffle your list (default: False)
   -rf, --replace_file   add -rf to replace the original file after lcnrd
