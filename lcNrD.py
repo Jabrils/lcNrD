@@ -14,6 +14,8 @@ parser.add_argument("-o", "--out", type=str,
     help='this is the file you want the lcNrD file to output as. Default = same name + _LcNrD')
 parser.add_argument("-id", "--input_delimiter", type=str, default='\\n',
     help='this is the delimiter you want lcNrD to use for the input file')
+parser.add_argument("-od", "--output_delimiter", type=str,
+    help='this is the delimiter you want lcNrD to use for the output file. Default = input delimiter')
 
 # store true or false so we can just be like 'if args.lowercase:'
 # so use true or false values instead of comparing strings
@@ -47,6 +49,10 @@ args = parser.parse_args()
 # this escapse character is left in so that the default value displays correctly in -h
 if(args.input_delimiter == "\\n"):
     args.input_delimiter = "\n"
+
+# set output delimiter to input delimiter if output delimiter isn't set
+if(args.output_delimiter == None):
+    args.output_delimiter = args.input_delimiter
 
 print('Grabbing file contents...')
 

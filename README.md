@@ -1,4 +1,4 @@
-# lcNrD v1.6.5
+# lcNrD v1.7
 
 lowercase AND remove Duplicates - A Very Simple Program;
 
@@ -9,6 +9,7 @@ As it stands, this program works best with text listed using the '\n' delimiter.
 
 ## Current Functionality:
 * Set input delimiter
+* Set output delimiter
 * Lowercase the text of a file
 * Remove duplicates of a file
 * Copy all operations onto a new file
@@ -29,6 +30,9 @@ As it stands, this program works best with text listed using the '\n' delimiter.
   -id INPUT_DELIMITER, --input_delimiter INPUT_DELIMITER
                         this is the delimiter you want lcNrD to use for the
                         input file (default: \n)
+  -od OUTPUT_DELIMITER, --output_delimiter OUTPUT_DELIMITER
+                        this is the delimiter you want lcNrD to use for the
+                        output file. Default = input delimiter (default: None)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
   -s, --shuffle         add -s to shuffle your list (default: False)
   -rf, --replace_file   add -rf to replace the original file after lcnrd
@@ -74,4 +78,3 @@ If you'd like to be able to access lcnrd from anywhere on your computer, add the
 7. You should now from anywhere on your computer be able to type simply `lcnrd -h` from a terminal & it should work!
 
 ## Roadmap:
-* Add output delimiter
