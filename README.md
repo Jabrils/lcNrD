@@ -1,4 +1,4 @@
-# lcNrD v1.6
+# lcNrD v1.6.5
 
 lowercase AND remove Duplicates - A Very Simple Program;
 
@@ -8,6 +8,7 @@ I find myself having to clean up data quite often & lose python scripts that I w
 As it stands, this program works best with text listed using the '\n' delimiter. I plan to soon add more delimiter options
 
 ## Current Functionality:
+* Set input delimiter
 * Lowercase the text of a file
 * Remove duplicates of a file
 * Copy all operations onto a new file
@@ -25,6 +26,8 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         treatment (default: None)
   -o OUT, --out OUT     this is the file you want the lcNrD file to output as.
                         Default = same name + _LcNrD (default: None)
+  -id INPUT_DELIMITER, --input_delimiter INPUT_DELIMITER
+                        this is the delimiter you want lcNrD to use for the
   -l, --lowercase       add -l to set lowercase to true (default: False)
   -d, --duplicates      add -d to remove duplicate elements (default: False)
   -s, --shuffle         add -s to shuffle your list (default: False)
@@ -71,5 +74,4 @@ If you'd like to be able to access lcnrd from anywhere on your computer, add the
 7. You should now from anywhere on your computer be able to type simply `lcnrd -h` from a terminal & it should work!
 
 ## Roadmap:
-* Add input delimiter
 * Add output delimiter
