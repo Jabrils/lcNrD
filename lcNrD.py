@@ -12,6 +12,10 @@ parser.add_argument(
     help='** this is the file you\'re targeting to get the lcNrD treatment')
 parser.add_argument("-o", "--out", type=str,
     help='this is the file you want the lcNrD file to output as. Default = same name + _LcNrD')
+parser.add_argument("-id", "--input_delimiter", type=str, default='\\n',
+    help='this is the delimiter you want lcNrD to use for the input file')
+parser.add_argument("-od", "--output_delimiter", type=str,
+    help='this is the delimiter you want lcNrD to use for the output file. Default = input delimiter')
 
 # store true or false so we can just be like 'if args.lowercase:'
 # so use true or false values instead of comparing strings
@@ -41,6 +45,15 @@ parser.add_argument('-kae', "--keyword_add_end", type=str,
     help='add a -kae to add some text to the end of every line')
 args = parser.parse_args()
 
+# check if input_delimiter is set to default & if so rectify escape character
+# this escapse character is left in so that the default value displays correctly in -h
+if(args.input_delimiter == "\\n"):
+    args.input_delimiter = "\n"
+
+# set output delimiter to input delimiter if output delimiter isn't set
+if(args.output_delimiter == None):
+    args.output_delimiter = args.input_delimiter
+
 print('Grabbing file contents...')
 
 # open the target file & grab its contents. Using `with` like this automatically
@@ -49,7 +62,7 @@ with open(args.file, "r") as fp:
     text = fp.read()
 
 # let's create an array of the lines
-lines = text.split("\n")
+lines = text.split(args.input_delimiter)
 
 # Remove blank lines
 if args.blank_lines:
@@ -251,6 +264,6 @@ with open(args.out, "w") as fp:
     # its creating a brand new one. This gets quickly gets slow with lots of text
     # so we wanna do this as little as possible. Using join on the list means
     # we just make all the string concatenation opertations in one go.
-    fp.write("\n".join(lines))
+    fp.write(args.output_delimiter.join(lines))
 
 print('...& DONE!')
