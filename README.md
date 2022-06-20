@@ -32,10 +32,10 @@ As it stands, this program works best with text listed using the '\n' delimiter.
                         operation (default: False)
   -bl, --blank_lines    add -bl to remove all blank lines (default: False)
   -cmi CHARACTER_MIN, --character_min CHARACTER_MIN
-                        limits the minimal amount of chacters required
+                        limits the minimal amount of characters required
                         (default: 0)
   -cma CHARACTER_MAX, --character_max CHARACTER_MAX
-                        limits the maximum amount of chacters required
+                        limits the maximum amount of characters required
                         (default: None)
   -kr KEYWORD_REMOVAL, --keyword_removal KEYWORD_REMOVAL
                         add a -kr to remove lines with the removal keyword,
@@ -73,3 +73,4 @@ If you'd like to be able to access lcnrd from anywhere on your computer, add the
 ## Roadmap:
 * Add input delimiter
 * Add output delimiter
+
